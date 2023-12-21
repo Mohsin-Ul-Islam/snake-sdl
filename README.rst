@@ -8,15 +8,11 @@ Prerequisites
 
 You need to have SDL2 installed on your system. For Debian/Ubuntu based distros.
 
-```sh
-sudo apt install libsdl2-dev
-```
+``sudo apt install libsdl2-dev``
 
 Running the project
 ===================
 
 To run the project, execute the below command.
 
-```sh
-make run
-```
+``make run``
