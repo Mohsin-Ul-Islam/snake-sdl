@@ -7,6 +7,11 @@
 #include "food.h"
 #include "snake.h"
 
+#define PIECE_SIZE 20
+
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
+
 #define SNAKE_INITIAL_SIZE 3
 
 void game_tick();

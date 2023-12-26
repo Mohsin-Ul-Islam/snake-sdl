@@ -47,7 +47,13 @@ int main(void) {
       game_handle_input(&event);
     }
 
-    // ticks every 300 miliseconds
+    // exit early if the game is done
+    // avoiding an extra processing frame
+    if (done) {
+      break;
+    }
+
+    // ticks every 100 miliseconds
     uint64_t current = SDL_GetTicks64();
     if ((current - last) >= 100) {
       last = current;

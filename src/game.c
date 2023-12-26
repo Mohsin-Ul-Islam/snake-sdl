@@ -2,11 +2,6 @@
 
 #include "game.h"
 
-#define PIECE_SIZE 20
-
-#define SCREEN_WIDTH 640
-#define SCREEN_HEIGHT 480
-
 food_t *food;
 snake_t *snake;
 SDL_Rect *render_rect;
