@@ -3,8 +3,6 @@
 
 #include <stddef.h>
 
-#define FOOD_SIZE 18
-
 typedef struct food {
   size_t x;
   size_t y;

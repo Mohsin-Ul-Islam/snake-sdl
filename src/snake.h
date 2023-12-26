@@ -3,8 +3,7 @@
 
 #include <stddef.h>
 
-#define MAX_SNAKE_SIZE 10
-#define SNAKE_PIECE_SIZE 20
+#define MAX_SNAKE_SIZE 100
 
 // enum to represent the direction of a snake
 typedef enum snake_direction {
@@ -31,6 +30,9 @@ typedef struct snake {
 
   // the current direction of the snake
   snake_direction_t direction;
+
+  // the last direction the snake moved in
+  snake_direction_t last_direction;
 
   // the current size of the snake
   size_t size;

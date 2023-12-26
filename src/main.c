@@ -23,8 +23,9 @@ int main(void) {
   }
 
   SDL_Event event;
-  SDL_Window *window =
-      SDL_CreateWindow("Snake", 0, 0, 640, 480, SDL_WINDOW_RESIZABLE);
+  SDL_Window *window = SDL_CreateWindow("Snake", SDL_WINDOWPOS_UNDEFINED,
+                                        SDL_WINDOWPOS_UNDEFINED, SCREEN_WIDTH,
+                                        SCREEN_HEIGHT, SDL_WINDOW_SHOWN);
 
   SDL_Renderer *renderer = SDL_CreateRenderer(
       window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
@@ -46,9 +47,9 @@ int main(void) {
       game_handle_input(&event);
     }
 
-    // ticks every half a second
+    // ticks every 300 miliseconds
     uint64_t current = SDL_GetTicks64();
-    if ((current - last) >= 300) {
+    if ((current - last) >= 100) {
       last = current;
       game_tick();
     }

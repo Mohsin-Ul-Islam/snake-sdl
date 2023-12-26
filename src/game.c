@@ -2,20 +2,32 @@
 
 #include "game.h"
 
+#define PIECE_SIZE 20
+
+#define SCREEN_WIDTH 640
+#define SCREEN_HEIGHT 480
+
 food_t *food;
 snake_t *snake;
+SDL_Rect *render_rect;
 
 void render_food(SDL_Renderer *renderer, const food_t *food);
 void render_snake(SDL_Renderer *renderer, const snake_t *snake);
 
 void game_init() {
-  food = food_create(rand() % 32, rand() % 24);
   snake = snake_create(SNAKE_INITIAL_SIZE, RIGHT);
+  food = food_create(rand() % (SCREEN_WIDTH / PIECE_SIZE),
+                     rand() % (SCREEN_HEIGHT / PIECE_SIZE));
+
+  render_rect = malloc(sizeof(SDL_Rect));
+  render_rect->w = PIECE_SIZE - 2;
+  render_rect->h = PIECE_SIZE - 2;
 }
 
 void game_destroy() {
   food_destroy(food);
   snake_destroy(snake);
+  free(render_rect);
 }
 
 void game_render(SDL_Renderer *renderer) {
@@ -36,8 +48,8 @@ void game_tick() {
   if (head.x == food->x && head.y == food->y) {
     snake_eat(snake);
 
-    food->x = rand() % 32;
-    food->y = rand() % 24;
+    food->x = rand() % (SCREEN_WIDTH / PIECE_SIZE);
+    food->y = rand() % (SCREEN_HEIGHT / PIECE_SIZE);
   }
 }
 
@@ -61,33 +73,24 @@ void game_handle_input(SDL_Event *event) {
 }
 
 void render_snake(SDL_Renderer *renderer, const snake_t *snake) {
-
-  SDL_Rect rect = (SDL_Rect){
-      .w = SNAKE_PIECE_SIZE - 2,
-      .h = SNAKE_PIECE_SIZE - 2,
-  };
-
   SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+
   for (size_t i = 0; i < snake->size; i++) {
     if (i != 0) {
       SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
     }
-    rect.x = snake->pieces[i].x;
-    rect.y = snake->pieces[i].y;
 
-    SDL_RenderFillRect(renderer, &rect);
+    render_rect->x = snake->pieces[i].x * PIECE_SIZE;
+    render_rect->y = snake->pieces[i].y * PIECE_SIZE;
+
+    SDL_RenderFillRect(renderer, render_rect);
   }
 }
 
 void render_food(SDL_Renderer *renderer, const food_t *food) {
-
-  SDL_Rect rect = (SDL_Rect){
-      .w = FOOD_SIZE,
-      .h = FOOD_SIZE,
-      .x = food->x,
-      .y = food->y,
-  };
+  render_rect->x = food->x * PIECE_SIZE;
+  render_rect->y = food->y * PIECE_SIZE;
 
   SDL_SetRenderDrawColor(renderer, 0, 0, 255, SDL_ALPHA_OPAQUE);
-  SDL_RenderFillRect(renderer, &rect);
+  SDL_RenderFillRect(renderer, render_rect);
 }
