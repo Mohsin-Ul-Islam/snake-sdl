@@ -23,6 +23,7 @@ snake_t *snake_create(const size_t size, const snake_direction_t direction) {
 void snake_destroy(snake_t *snake) {
   free(snake->pieces);
   free(snake);
+  snake = NULL;
 }
 
 void snake_set_direction(snake_t *snake, const snake_direction_t direction) {

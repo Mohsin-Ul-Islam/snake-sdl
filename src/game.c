@@ -23,6 +23,7 @@ void game_destroy() {
   food_destroy(food);
   snake_destroy(snake);
   free(render_rect);
+  render_rect = NULL;
 }
 
 void game_render(SDL_Renderer *renderer) {
