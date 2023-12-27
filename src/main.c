@@ -34,7 +34,7 @@ int main(void) {
   uint64_t last = 0;
 
   bool done = false;
-  while (!done) {
+  while (!done && !game_is_over()) {
 
     while (SDL_PollEvent(&event)) {
       if (event.type == SDL_WINDOWEVENT) {

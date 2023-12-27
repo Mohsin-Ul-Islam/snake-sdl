@@ -11,7 +11,4 @@ food_t *food_create(const size_t x, const size_t y) {
   return food;
 }
 
-void food_destroy(food_t *food) {
-  free(food);
-  food = NULL;
-}
+void food_destroy(food_t *food) { free(food); }
