@@ -1,3 +1,7 @@
+.. image:: screenshots/snake.png
+   :align: center
+
+======
 Snake
 ======
 
