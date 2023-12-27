@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdlib.h>
 
 #include "game.h"
@@ -39,13 +40,32 @@ void game_tick() {
   // first let the snake move
   snake_move(snake);
 
-  // check if the snake eats the food
+  // check if the snake bumps into itself
   snake_piece_t head = snake->pieces[0];
+  for (size_t i = 1; i < snake->size; i++) {
+    if (snake->pieces[i].x == head.x && snake->pieces[i].y == head.y) {
+      snake->size = i;
+    }
+  }
+
+  // check if the snake eats the food
   if (head.x == food->x && head.y == food->y) {
     snake_eat(snake);
 
-    food->x = rand() % (SCREEN_WIDTH / PIECE_SIZE);
-    food->y = rand() % (SCREEN_HEIGHT / PIECE_SIZE);
+    // generate food that is not on snake's body
+    bool is_colliding = false;
+    do {
+      food->x = rand() % (SCREEN_WIDTH / PIECE_SIZE);
+      food->y = rand() % (SCREEN_HEIGHT / PIECE_SIZE);
+
+      is_colliding = false;
+      for (size_t i = 0; i < snake->size; i++) {
+        if (food->x == snake->pieces[i].x && food->y == snake->pieces[i].y) {
+          is_colliding = true;
+          break;
+        }
+      }
+    } while (is_colliding);
   }
 }
 
