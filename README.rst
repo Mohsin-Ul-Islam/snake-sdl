@@ -12,7 +12,7 @@ Prerequisites
 
 You need to have SDL2 installed on your system. For Debian/Ubuntu based distros.
 
-``sudo apt install libsdl2-dev``
+``sudo apt install libsdl2-dev libsdl2-mixer-dev``
 
 Running the project
 ===================
@@ -20,3 +20,12 @@ Running the project
 To run the project, execute the below command.
 
 ``make run``
+
+Credits
+=======
+
+Music
+-----
+
+The game's music is created by Not Jam and taken from https://not-jam.itch.io/not-jam-music-pack.
+
